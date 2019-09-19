@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bierkeller</title>
+  <style>
+    input, button{display: block;}
+  </style>
+</head>
+
+<body>
 <input type='text' id='title' required='true' placeholder='Full song title' autocomplete="off">
 <input type='text' id='comment' placeholder='Comment (optional)' autocomplete="off">
 <button onclick='submit()'>Submit</button>
@@ -19,6 +31,10 @@
   
   function s(i,t){
     var x=new XMLHttpRequest();x.open('POST','https://api.telegram.org/bot964106543:AAFYHrl17Rz7jZ2XXBAPHMQsgQNhdgtX9J8/sendMessage',true);x.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-    x.send(`{"chat_id": ${i},  "parse_mode": "markdown", "text": "${t}"}`);
+    x.send(`{"chat_id": ${i},  "parse_mode": "markdown", "disable_web_page_preview": true, "text": "${t}"}`);
   }
 </script>
+  
+</body>
+
+</html>
