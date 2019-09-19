@@ -14,6 +14,9 @@
     .el{
       margin: 10px;
     }
+    .el, button{
+        font-size: 5vw;
+    }
   </style>
 </head>
 
@@ -21,7 +24,7 @@
   <div class='container'>
     <input class='el' type='text' id='title' required='true' placeholder='Full song title' autocomplete="off">
     <input class='el' type='text' id='comment' placeholder='Comment (optional)' autocomplete="off">
-    <div class='el'><button onclick='submit()'>Submit</button></div>
+    <div class='el' style='display:flex; flex-direction: row-reverse;'><button onclick='submit()'>Submit</button></div>
   </div>
 <script>
   function submit(){
