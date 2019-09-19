@@ -4,15 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bierkeller</title>
-  <style>
-    input, button{display: block;}
-  </style>
 </head>
 
 <body>
-<input type='text' id='title' required='true' placeholder='Full song title' autocomplete="off">
-<input type='text' id='comment' placeholder='Comment (optional)' autocomplete="off">
-<button onclick='submit()'>Submit</button>
+  <div style='flex'>
+    <input type='text' id='title' required='true' placeholder='Full song title' autocomplete="off">
+    <input type='text' id='comment' placeholder='Comment (optional)' autocomplete="off">
+    <div><button onclick='submit()'>Submit</button></div>
+  </div>
 <script>
   function submit(){
     var title = document.getElementById('title').value;
