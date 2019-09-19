@@ -4,13 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bierkeller</title>
+  
+  <style>
+    .container{
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+    .el{
+      margin: 10px;
+    }
+  </style>
 </head>
 
 <body>
-  <div style='flex'>
-    <input type='text' id='title' required='true' placeholder='Full song title' autocomplete="off">
-    <input type='text' id='comment' placeholder='Comment (optional)' autocomplete="off">
-    <div><button onclick='submit()'>Submit</button></div>
+  <div class='container'>
+    <input class='el' type='text' id='title' required='true' placeholder='Full song title' autocomplete="off">
+    <input class='el' type='text' id='comment' placeholder='Comment (optional)' autocomplete="off">
+    <div class='el'><button onclick='submit()'>Submit</button></div>
   </div>
 <script>
   function submit(){
