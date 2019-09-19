@@ -1,7 +1,7 @@
-<form onsubmit="submit(); return false">
+<form onsubmit="return false">
 <input type='text' name='title' required='true' placeholder='Full song title' autocomplete="off">
 <input type='text' name='comment' placeholder='Comment (optional)' autocomplete="off">
-<input type='submit'>
+<input type='submit' onclick='submit()'>
 </form>
 <script>
   function submit(){
