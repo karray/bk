@@ -4,7 +4,7 @@
 <input type='submit'>
 </form>
 <script>
-  fuhction submit(){
+  function submit(){
     d=new FormData(document.querySelector('form'));x=new XMLHttpRequest();x.open('POST','https://api.telegram.org/bot964106543:AAFYHrl17Rz7jZ2XXBAPHMQsgQNhdgtX9J8/sendMessage',true);x.setRequestHeader('Content-type', 'application/json;charset=UTF-8');x.send('{"chat_id": 80968060, "text": "Title: '+d.get('title')+(d.get('comment')&&('\nComment: '+d.get('comment')))+'"}');location.reload();
   }
 </script>
