@@ -58,7 +58,7 @@
   
   function s(i,t){
     $.post('https://api.telegram.org/bot964106543:AAFYHrl17Rz7jZ2XXBAPHMQsgQNhdgtX9J8/sendMessage', 
-       {chat_id: i,  parse_mode: "markdown", disable_web_page_preview: true, "text": t}).done(()->location.reload());
+       {chat_id: i,  parse_mode: "markdown", disable_web_page_preview: true, "text": t}).done(function(){location.reload()});
     //var x=new XMLHttpRequest();x.open('POST','https://api.telegram.org/bot964106543:AAFYHrl17Rz7jZ2XXBAPHMQsgQNhdgtX9J8/sendMessage',true);x.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
     //x.send(`{"chat_id": ${i},  "parse_mode": "markdown", "disable_web_page_preview": true, "text": "${t}"}`);
   }
