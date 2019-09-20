@@ -37,26 +37,30 @@
   </div>
   
   <a href='https://search.google.com/local/writereview?placeid=ChIJMbhIZOFLqEcRFffsEFIucGY'>Rate us!</a>
+  
+<script src='https://code.jquery.com/jquery-3.4.1.min.js'>/<script>
 <script>
   function submit(){
-    var title = document.getElementById('title').value;
+    var title = $('#title').val();
     if(!title){
       alert('Title is required');
       return false;
     }
     title = `[${title}](https://open.spotify.com/search/${escape(title)})`
-    var c = document.getElementById('comment').value;
+    var c = $('#comment').val();
     t=`Title: ${title}${(c&&('\nComment: '+c))}`
     
     s(80968060, t);
     s(361736822, t);
     s(327917068, t);
-    setTimeout(function(){location.reload()}, 100);
+    //setTimeout(function(){location.reload()}, 100);
   }
   
   function s(i,t){
-    var x=new XMLHttpRequest();x.open('POST','https://api.telegram.org/bot964106543:AAFYHrl17Rz7jZ2XXBAPHMQsgQNhdgtX9J8/sendMessage',true);x.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-    x.send(`{"chat_id": ${i},  "parse_mode": "markdown", "disable_web_page_preview": true, "text": "${t}"}`);
+    $.post('https://api.telegram.org/bot964106543:AAFYHrl17Rz7jZ2XXBAPHMQsgQNhdgtX9J8/sendMessage', 
+       {chat_id: i,  parse_mode: "markdown", disable_web_page_preview: true, "text": t}).done(()->location.reload());
+    //var x=new XMLHttpRequest();x.open('POST','https://api.telegram.org/bot964106543:AAFYHrl17Rz7jZ2XXBAPHMQsgQNhdgtX9J8/sendMessage',true);x.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+    //x.send(`{"chat_id": ${i},  "parse_mode": "markdown", "disable_web_page_preview": true, "text": "${t}"}`);
   }
 </script>
   
