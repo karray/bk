@@ -1,69 +1,185 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bierkeller</title>
-  
+  <script src="https://kit.fontawesome.com/5f9977948d.js" crossorigin="anonymous"></script>
+
   <style>
-    .container{
+    body {
+      background-color: black;
+    }
+
+    .container {
       display: flex;
       flex-direction: column;
       padding: 10px;
       max-width: 400px;
       margin: auto;
     }
-    .el{
-      margin: 10px;
+
+    .el {
+      /* margin: 10px; */
     }
-    .el, button{
+
+    .el,
+    button {
       padding: 8px;
       font-size: 5vw;
     }
-    
+
+    button {
+      background-color: rgb(192, 0, 0);
+      ;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      font-weight: bold;
+      outline: none;
+    }
+
+    .input-container {
+      display: flex;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .input-container .fas {
+      font-size: 32px;
+      padding: 10px;
+      text-align: center;
+      background: rgb(192, 0, 0);
+      color: white;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .input-container input {
+      width: 100%;
+      padding: 10px;
+      outline: none;
+      border: 1px solid rgb(192, 0, 0);
+      ;
+    }
+
+    .input-container input:focus {
+      /* border: 2px solid red; */
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .links {
+      display: flex;
+      justify-content: space-around;
+      color: white;
+      margin-top: 25px;
+    }
+
+    .links a {
+      color:  rgb(192,0,0);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    .links div {
+      display: flex;
+      /* border: 1px solid rgb(192,0,0); */
+      flex-direction: column;
+      padding: 10px;
+      border-radius: 3px;
+    }
+
+    .links i {
+      font-size: 45px;
+      margin: auto;
+      margin-bottom: 5px;
+    }
+
     @media only screen and (min-width: 600px) {
-      .el, button{
+
+      .el,
+      button {
         font-size: 14px;
-       }
+      }
+
+      .input-container .fas {
+        font-size: 28px;
+        padding: 6px;
+
+      }
     }
   </style>
 </head>
 
 <body>
+  <header>
+  </header>
   <div class='container'>
-    <input class='el' type='text' id='title' required='true' placeholder='Full song title' autocomplete="off">
-    <input class='el' type='text' id='comment' placeholder='Comment (optional)' autocomplete="off">
-    <div class='el' style='display:flex; flex-direction: row-reverse;'><button onclick='submit()'>Submit</button></div>
+    <div class="input-container">
+      <i class="fas fa-music"></i>
+      <input class='el' type='text' id='title' required='true' placeholder='Full song title' autocomplete="off">
+    </div>
+    <div class="input-container">
+      <i class="fas fa-comment-dots"></i>
+
+      <input class='el' type='text' id='comment' placeholder='Comment (optional)' autocomplete="off">
+    </div>
+    <div class='' style='display:flex; flex-direction: row-reverse;'><button id='request'>Request</button></div>
+    <div class='links'>
+      <div>
+        <a href='https://search.google.com/local/writereview?placeid=ChIJMbhIZOFLqEcRFffsEFIucGY' target="_blank">
+          <i class="fas fa-star-half-alt"></i>
+          <span>RATE US</span>
+        </a>
+      </div>
+      <div>
+          <a href='https://www.facebook.com/bierkellerbiesdorf/' target="_blank">
+            <i class="fab fa-facebook-square"></i>
+            <span>FACEBOOK</span>
+          </a>
+        </div>
+    </div>
   </div>
-  
-  <a href='https://search.google.com/local/writereview?placeid=ChIJMbhIZOFLqEcRFffsEFIucGY'>Rate us!</a>
-  
-<script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
-<script>
-  function submit(){
-    var title = $('#title').val();
-    if(!title){
-      alert('Title is required');
-      return false;
+
+
+  <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>
+  <script>
+
+  </script>
+  <script id='sc'>
+    $(() => {
+      $('#request').click(() => {
+        var title = $('#title').val();
+        if (!title) {
+          alert('Title is required');
+          return false;
+        }
+        title = `[${title}](https://open.spotify.com/search/${escape(title)})`
+        var c = $('#comment').val();
+        t = `Title: ${title}${(c && ('\nComment: ' + c))}`
+
+        s(80968060, t);
+        s(361736822, t);
+        s(327917068, t);
+        //setTimeout(function(){location.reload()}, 100);
+      })
+      $('#sc').remove()
+    });
+
+
+    function s(i, t) {
+      $.post('https://api.telegram.org/bot964106543:AAFYHrl17Rz7jZ2XXBAPHMQsgQNhdgtX9J8/sendMessage',
+        { chat_id: i, parse_mode: "markdown", disable_web_page_preview: true, "text": t }).done(function () { location.reload() });
+      //var x=new XMLHttpRequest();x.open('POST','https://api.telegram.org/bot964106543:AAFYHrl17Rz7jZ2XXBAPHMQsgQNhdgtX9J8/sendMessage',true);x.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+      //x.send(`{"chat_id": ${i},  "parse_mode": "markdown", "disable_web_page_preview": true, "text": "${t}"}`);
     }
-    title = `[${title}](https://open.spotify.com/search/${escape(title)})`
-    var c = $('#comment').val();
-    t=`Title: ${title}${(c&&('\nComment: '+c))}`
-    
-    s(80968060, t);
-    s(361736822, t);
-    s(327917068, t);
-    //setTimeout(function(){location.reload()}, 100);
-  }
-  
-  function s(i,t){
-    $.post('https://api.telegram.org/bot964106543:AAFYHrl17Rz7jZ2XXBAPHMQsgQNhdgtX9J8/sendMessage', 
-       {chat_id: i,  parse_mode: "markdown", disable_web_page_preview: true, "text": t}).done(function(){location.reload()});
-    //var x=new XMLHttpRequest();x.open('POST','https://api.telegram.org/bot964106543:AAFYHrl17Rz7jZ2XXBAPHMQsgQNhdgtX9J8/sendMessage',true);x.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-    //x.send(`{"chat_id": ${i},  "parse_mode": "markdown", "disable_web_page_preview": true, "text": "${t}"}`);
-  }
-</script>
-  
+  </script>
+
 </body>
 
 </html>
